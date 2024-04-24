@@ -1,6 +1,6 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
-Name=Install FNV MCM Unpacker
+Name=Run FNV MCM Unpacker
 Exec=curl https://raw.githubusercontent.com/STBoyden/newvegas-linux-mcm-extractor/main/scripts/install.sh | bash -s --
 Icon=steamdeck-gaming-return
 Terminal=true
