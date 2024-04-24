@@ -34,3 +34,4 @@ jobs:
         generateReleaseNotes: true
         name: "Most recent update"
         tag: ${{ github.ref }}
+        commit: ${{ github.ref }}
