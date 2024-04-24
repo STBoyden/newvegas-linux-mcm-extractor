@@ -5,8 +5,7 @@ name: Go
 
 on:
   push:
-    tags:
-      - "*"
+    branches: ["main"]
 
 jobs:
 
@@ -26,6 +25,11 @@ jobs:
     - name: Build
       run: go build
 
+    - name: Tag build
+      uses: jimeh/update-tags-action@v1
+      with:
+        tags: "release"
+
     - name: Update release
       uses: ncipollo/release-action@v1.14.0
       with:
@@ -33,3 +37,4 @@ jobs:
         artifacts: "./newvegas-linux-mcm-extractor"
         generateReleaseNotes: true
         name: "Most recent update"
+        tag: "release"
