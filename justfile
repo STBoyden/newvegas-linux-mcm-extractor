@@ -5,6 +5,9 @@ prebuild:
     mkdir -p out
     go mod tidy
 
+fmt:
+    go run mvdan.cc/gofumpt@latest -w main.go
+
 build: prebuild
     go build -o out/app{{ ext }}
 
