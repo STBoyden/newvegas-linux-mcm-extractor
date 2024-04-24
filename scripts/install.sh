@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -xe
 
 mkdir -p /tmp/mcm-unpacker-download
 
