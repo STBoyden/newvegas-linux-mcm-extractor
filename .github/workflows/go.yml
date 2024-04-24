@@ -33,3 +33,4 @@ jobs:
         artifacts: "./newvegas-linux-mcm-extractor"
         generateReleaseNotes: true
         name: "Most recent update"
+        tag: ${{ github.sha }}
