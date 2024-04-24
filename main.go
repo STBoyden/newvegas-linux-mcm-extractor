@@ -218,24 +218,21 @@ func extractAndCopyFomod(modFile *os.File, modFileSize int64, modName, modStub s
 		}
 
 		homeDir, _ := os.UserHomeDir()
+		fileName := fmt.Sprintf("%s - Repacked.zip", modName)
 
-		outputZipPath, err := zenity.SelectFileSave(
-			zenity.Title("Output file for The Mod Configuration Menu"),
-			zenity.Filename(fmt.Sprintf(homeDir+"/%s - Repacked.7z", modName)),
-		)
-		if err != nil {
-			return err
-		}
-
+		outputZipPath := homeDir + "/Downloads/" + fileName
 		outputZip, err := os.Create(outputZipPath)
 		if err != nil {
 			return err
 		}
 
 		zipWriter := zip.NewWriter(outputZip)
+		defer zipWriter.Close()
 
 		r, err := sevenzip.NewReader(fomodFile, fomodInfo.Size())
-		if r == nil {
+		if err != nil {
+			showError(err)
+		} else if r == nil {
 			showError(errors.New("fomod archive is empty"))
 		}
 		for _, f := range r.File {
@@ -257,6 +254,11 @@ func extractAndCopyFomod(modFile *os.File, modFileSize int64, modName, modStub s
 				return err
 			}
 		}
+
+		zenity.Info(
+			fmt.Sprintf("Repacked %s to \"%s\"", modName, outputZipPath),
+			zenity.Title(fmt.Sprintf("Finished repacking %s", modName)),
+		)
 	}
 
 	return nil
